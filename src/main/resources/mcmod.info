@@ -1,0 +1,12 @@
+[
+{
+  "modid": "gm3teleporter",
+  "name": "Gm3 Teleporter",
+  "description": "Teleport to player using GM3",
+  "version": "1.0",
+  "mcversion": "1.8",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ATE47"]
+}
+]
