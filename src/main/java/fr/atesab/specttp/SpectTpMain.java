@@ -8,6 +8,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ServerboundTeleportToEntityPacket;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -34,7 +35,10 @@ public class SpectTpMain {
      * @param p  us
      * @param to the other player
      */
-    public static void teleport(LocalPlayer p, PlayerInfo to) {
+    public static void teleport(PlayerInfo to) {
+        var p = Minecraft.getInstance().player;
+        if (p == null)
+            return;
         var mode = Minecraft.getInstance().getConnection().getPlayerInfo(p.getGameProfile().getId()).getGameMode();
         // ask for the mode
         if (mode != GameType.SPECTATOR) {
@@ -55,15 +59,10 @@ public class SpectTpMain {
     public void registerCommand(RegisterCommandsEvent ev) {
         ev.getDispatcher().register(Commands.literal("sptp")
                 .then(Commands.argument("username", ConnectionPlayerArgument.player()).executes(c -> {
-                    if (c.getSource().getEntity()instanceof LocalPlayer p) {
-                        var to = ConnectionPlayerArgument.getPlayer(c, "username");
-                        c.getSource().sendSuccess(new TranslatableComponent("specttp.tp", to.getProfile().getName()),
-                                false);
-                        teleport(p, to);
-                    } else {
-                        c.getSource().sendFailure(
-                                new TranslatableComponent("specttp.noaplayer").withStyle(ChatFormatting.RED));
-                    }
+                    var to = ConnectionPlayerArgument.getPlayer(c, "username");
+                    c.getSource().sendSuccess(new TranslatableComponent("specttp.tp", to.getProfile().getName()),
+                            false);
+                    teleport(to);
                     return 1;
                 })).executes(c -> {
                     c.getSource()
