@@ -1,0 +1,6 @@
+{
+  "specttp.help": "%s <Joueur>: Se teleporter vers un joueur",
+  "specttp.tp": "Teleportation vers %s...",
+  "specttp.unknown": "Joueur inconnu !",
+  "specttp.noaplayer": "Vous devez être un joueur pour executer cette commande !"
+}

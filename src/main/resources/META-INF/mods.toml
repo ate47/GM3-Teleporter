@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[37,)"
+license="GNU GPL 3"
+issueTrackerURL="https://github.com/ate47/GM3-Teleporter/issues"
+[[mods]]
+modId="specttp"
+version="2.0.0"
+displayName="Spectator TP"
+logoFile="logo.png"
+credits="" #optional
+authors="ATE47"
+description="Get command to tp using the spectator gamemode."
+
+[[dependencies.specttp]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.17.1,1.18)"
+    ordering="NONE"
+    side="BOTH"
